@@ -1,16 +1,235 @@
+
+/* Set the image to fill its parent and make transparent */
+
+.disabled {
+  opacity: 0.5;
+}
+
+.add-thumbnail-bg {
+  opacity: 0.7;
+}
+
+.add-thumbnail-bg:active {
+  opacity: 0.9;
+}
+
+.add-thumbnail-bg:hover {
+  opacity: 1;
+}
+
+/*
+PRODUCT CSS
+*/
+.upload-img-thumbnail {
+  width: 50px;
+  height: 50px;
+}
+.search-input-group {
+  position: relative;
+}
+.search-input {
+  height: 40px;
+  width: 50%;
+  border-radius: 20px;
+  border: 0.5px solid #ccc !important;
+  padding-left: 20px;
+}
+.search-input-icon {
+  position: absolute;
+  right: 20px;
+  top: 0px;
+  color: #999;
+}
+.search-btn {
+  border: 0.5px solid #e65540;
+  border-radius: 0 20px 20px 0;
+  padding: 10px 15px;
+  height: 40px;
+}
+
+.no-transition {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
+}
+.full-screen-modal {
+  width: 100% !important;
+  height: 90% !important;
+}
+.block-btn-delete {
+  right: 20px;
+  top: 19px;
+  font-size: 24px;
+}
+.block-btn-add-images {
+  left: 55px;
+  top: 23px;
+}
+.block-btn-edit-product {
+  left: 20px;
+  top: 20px;
+}
+.block-btn-delete:hover,
+.block-btn-edit-product:hover,
+.block-btn-add-images:hover {
+  color: #e65540;
+}
+
+.swal-button-container {
+  margin: auto;
+  display: flex;
+  position: relative;
+  float: right;
+  align-items: center;
+}
+
+.swal-button-container-center {
+  position: relative;
+  align-items: center;
+}
+
+.new-product-input {
+  border: #ddd solid 0.5px !important;
+  padding: 10px 20px;
+  flex: 1;
+  border-radius: 20px;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+/*
+MODAL CSS
+*/
+
+.swal-button--cancel {
+  color: #555 !important;
+  background-color: #efefef !important;
+  margin: 10px;
+}
+
+.swal-button--cancel:hover {
+  color: #fff !important;
+  background-color: #282c34 !important;
+}
+
+.swal-text {
+  width: 100%;
+  margin-bottom: 10px !important;
+}
+
+.modal-sub-header {
+  margin: 0px 0px 10px 0px;
+}
+
+
+
+/*
+COMMON CSS
+*/
+
+.add-product-container {
+  position: relative;
+}
+.add-bg {
+  font-size: 50px !important;
+  color: #aaa;
+  position: absolute;
+  top: 43%;
+  left: 43%;
+}
+
+.add-category-row {
+  margin: 10px !important;
+}
+
+.new-category-input {
+  border: #ddd solid 0.5px !important;
+  padding: 10px 20px;
+  flex: 1;
+  border-radius: 20px 0 0 20px;
+}
+
+.add-category-btn {
+  border-radius: 0 20px 20px 0 !important;
+}
+.swal-title {
+  font-size: 25px !important;
+}
+.category-row {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  -ms-box-orient: horizontal;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: flex;
+
+  -webkit-justify-content: space-around;
+  justify-content: space-around;
+  -webkit-flex-flow: row wrap;
+  flex-flow: row wrap;
+  -webkit-align-items: stretch;
+  align-items: stretch;
+}
+
+.hidden-edit {
+  display: none !important;
+}
+
+.flex-item {
+  padding: 10px;
+  font-weight: bold;
+  font-size: 2em;
+}
+
+.category-text {
+  font-size: 18px;
+  flex: 1;
+  text-align: start !important;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.category-name-edit,
+.category-delete {
+  width: 48px;
+  height: 48px;
+  font-size: 20px;
+  border-radius: 10px;
+  margin: 5px;
+  margin-top: auto;
+  margin-bottom: auto;
+  cursor: pointer;
+}
+
+.category-delete {
+  margin: 0px;
+}
+
+.category-delete:hover,
+.category-name-edit:hover {
+  color: #e65540;
+  transition: all ease 0.5s;
+}
+
+.category-delete:active,
+.category-name-edit:active {
+  color: #a03524;
+  transition: all ease 0.5s;
+}
+
 .App {
   text-align: center;
 }
 
 .App-logo {
+  animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
   pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
 }
 
 .App-header {

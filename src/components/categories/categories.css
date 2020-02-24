@@ -1,0 +1,27 @@
+.edit-categories-modal-body {
+  width: 100%;
+  font-family: Montserrat-Regular;
+  color: #333333;
+  font-size: 15px;
+  text-align: center;
+  line-height: normal;
+  vertical-align: top;
+  text-align: left;
+  display: inline-block;
+  font-weight: 400;
+  overflow-wrap: break-word;
+  box-sizing: border-box;
+  padding: 10px 10px 20px 20px;
+}
+
+.modal-err-msg {
+  color: #a0220f;
+  text-align: center;
+  margin: 20px auto 20px auto;
+  font-size: 14px;
+  transition: all 0.9s ease-in;
+}
+
+.padding-top {
+  padding-top: 20px;
+}
