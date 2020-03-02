@@ -69,8 +69,12 @@ class ProductThumbnail extends Component {
                         </div>
                         <div className="buy-container">
                             <div className="buy-buttons">
-                                <img src="images/amazon-logo.png" className="buyLogo" alt="amazon" />
-                                <img src="images/flipkart-logo.png" className="buyLogo" alt="flipkart" />
+                                <a href={product.amazon} target="_blank" rel="noopener noreferrer">
+                                    <img src="images/amazon-logo.png" className="buyLogo" alt="amazon" />
+                                </a>
+                                <a href={product.flipkart} target="_blank" rel="noopener noreferrer">
+                                    <img src="images/flipkart-logo.png" className="buyLogo" alt="flipkart" />
+                                </a>
                             </div>
                         </div>
                     </div>
