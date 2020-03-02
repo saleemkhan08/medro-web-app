@@ -26,7 +26,8 @@ export const RESET_MENU = "RESET_MENU";
 
 export const SHOW_PRODUCT_EDIT_MODAL = "SHOW_PRODUCT_EDIT_MODAL";
 export const HIDE_PRODUCT_EDIT_MODAL = "HIDE_PRODUCT_EDIT_MODAL";
-
+export const SHOW_ORDER_PRODUCT_MODAL = "SHOW_ORDER_PRODUCT_MODAL";
+export const HIDE_ORDER_PRODUCT_MODAL = "HIDE_ORDER_PRODUCT_MODAL";
 export const getProductsListRef = () => {
     return database
         .ref()
@@ -64,6 +65,15 @@ export const fetchProductsError = () => ({
 export const showProductEditModal = (product) => ({
     type: SHOW_PRODUCT_EDIT_MODAL,
     payload: product
+});
+
+export const showOrderProductModal = (product) => ({
+    type: SHOW_ORDER_PRODUCT_MODAL,
+    payload: product
+});
+
+export const hideOrderProductModal = () => ({
+    type: HIDE_ORDER_PRODUCT_MODAL
 });
 
 export const hideProductEditModal = () => ({

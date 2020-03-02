@@ -1,4 +1,4 @@
-import { CLOSE_IMAGE_UPLOAD_DIALOG, DELETE_IMAGE_SUCCESS, FETCH_IMAGES_BEGIN, FETCH_IMAGES_SUCCESS, IMAGE_UPLOAD_ERROR, IMAGE_UPLOAD_STARTED, IMAGE_UPLOAD_SUCCESS, OPEN_IMAGE_UPLOAD_DIALOG } from "./imagesActions";
+import { CLOSE_IMAGE_UPLOAD_DIALOG, DELETE_IMAGE_SUCCESS, FETCH_IMAGES_BEGIN, FETCH_IMAGES_SUCCESS, HIDE_PRODUCT_IMAGE_GALLERY, IMAGE_UPLOAD_ERROR, IMAGE_UPLOAD_STARTED, IMAGE_UPLOAD_SUCCESS, OPEN_IMAGE_UPLOAD_DIALOG, SHOW_PRODUCT_IMAGE_GALLERY } from "./imagesActions";
 
 const initialState = {
   images: [],
@@ -9,10 +9,24 @@ const initialState = {
   isUploading: false,
   refPath: undefined,
   currentIds: [],
-  product: {}
+  product: {},
+  galleryImages: [],
+  showGallery: false
 };
 const ImagesReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SHOW_PRODUCT_IMAGE_GALLERY:
+      return {
+        ...state,
+        showGallery: true,
+        galleryImages: action.payload
+      };
+    case HIDE_PRODUCT_IMAGE_GALLERY:
+      return {
+        ...state,
+        showGallery: false,
+        galleryImages: []
+      };
     case OPEN_IMAGE_UPLOAD_DIALOG:
       return {
         ...state,

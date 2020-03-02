@@ -1,10 +1,10 @@
 import React from "react";
-import { auth } from "../../store";
+import { login, logout } from "./AuthActions";
 export const LoginLink = props => {
     return (<li className={props.linkClass}>
         <a href="#auth"
             onClick={() => {
-                auth.signInWithPopup(props.provider);
+                login()
             }}>
             Login
         </a>
@@ -15,7 +15,7 @@ export const LogoutLink = props => {
     return (<li className={props.linkClass}>
         <a href="#auth"
             onClick={() => {
-                auth.signOut();
+                logout()
             }}>
             Logout
         </a>

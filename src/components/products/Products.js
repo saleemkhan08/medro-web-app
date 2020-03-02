@@ -6,7 +6,7 @@ class Products extends Component {
     render() {
         const { categoryId, catCount } = this.props;
         const { products } = this.props.productReducer;
-        const { isLoggedIn } = this.props.authReducer;
+        const { isAdmin } = this.props.authReducer;
         const productsMap = products[categoryId]
         const activeClass = (catCount === 1) ? "show active " : "";
         const areProductsAvailable = productsMap && Object.keys(productsMap).length > 0
@@ -18,7 +18,7 @@ class Products extends Component {
                 role="tabpanel"
             >
                 <ProductTiles
-                    isLoggedIn={isLoggedIn}
+                    isAdmin={isAdmin}
                     areProductsAvailable={areProductsAvailable}
                     productsMap={productsMap} />
             </div >
@@ -27,7 +27,7 @@ class Products extends Component {
 }
 
 const ProductTiles = (props) => {
-    const { areProductsAvailable, productsMap, isLoggedIn } = props;
+    const { areProductsAvailable, productsMap, isAdmin } = props;
     if (areProductsAvailable) {
         return (
             <div className="row">
@@ -42,24 +42,24 @@ const ProductTiles = (props) => {
 
                     })
                 }
-                <AddProductOption isEmpty={false} isLoggedIn={isLoggedIn} />
+                <AddProductOption isEmpty={false} isAdmin={isAdmin} />
             </div>
         )
-    } else if (isLoggedIn) {
-        return (<AddProductOption isEmpty={true} isLoggedIn />)
+    } else if (isAdmin) {
+        return (<AddProductOption isEmpty={true} isAdmin />)
     }
     return (<NoProductFound />)
 }
 
 const AddProductOption = (props) => {
-    const { isLoggedIn, isEmpty } = props;
-    if (isEmpty && isLoggedIn) {
+    const { isAdmin, isEmpty } = props;
+    if (isEmpty && isAdmin) {
         return (
             <div className="row">
                 <AddProductThumbnail />
             </div>
         );
-    } else if (isLoggedIn) {
+    } else if (isAdmin) {
         return (<AddProductThumbnail />)
     }
     else {
@@ -69,8 +69,8 @@ const AddProductOption = (props) => {
 
 const NoProductFound = () => {
     return (
-        <div className="row loading-div">
-            No Products Found!!!
+        <div className="row no-products-div">
+            <h3>No Products Found !!!</h3>
         </div>
     )
 }

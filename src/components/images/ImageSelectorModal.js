@@ -1,102 +1,106 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import Modal, { ModalFooter, ModalHeader } from 'thnki-react-modal';
+import ReactFileReader from "thnki-react-file-reader";
+import Modal, { ModalHeader } from 'thnki-react-modal';
+import { v4 as uuidv4 } from "uuid";
 import { storageRef } from "../../store";
 import { getProductRef } from "../products/ProductActions";
 import { closeImageUploadDialog } from "./imagesActions";
 import "./imageSelectorModal.css";
 import ImagesGrid from "./ImagesGrid";
-import UploadImagesGrid from "./UploadImagesGrid";
 class ImageSelectorModal extends Component {
     state = {
-        openEditDialog: false,
-        openAddDialog: false,
-        image: undefined,
-        searchStr: "",
-        imageList: []
+        isUploading: false
     }
-
-    onModalClose = () => {
-        const { dispatch } = this.props;
-        dispatch(closeImageUploadDialog())
-    }
-
     render() {
         const { openUploadImgDialog } = this.props.imagesReducer
         const { product } = this.props.imagesReducer
+        const { isUploading } = this.state
         return (
             <Modal
                 onModalClose={this.onModalClose}
+                isClosingDisabled={isUploading}
                 openModal={openUploadImgDialog} >
-                <ModalHeader text="Upload Images" />
-                <div className="modal-body-container">
-                    <UploadImagesGrid
-                        handleImagesUpload={(imageList) => { this.setState({ imageList: imageList }) }}
-                        isDisabled={this.state.uploading} />
-                    <ImagesGrid product={product} />
-                    <div className="modal-err-msg">{this.state.errorMsg}</div>
+                <ModalHeader text={isUploading ? "Uploading..." : "Upload Images"} />
+                <div className="modal-body-container p-b-15">
+                    <ImagesGrid product={product}>
+                        <UploadBtn isDisabled={isUploading} onImagesUpload={(fileDict) => this.handleImagesUpload(fileDict, product)} />
+                    </ImagesGrid>
                 </div>
-                <ModalFooter
-                    isDisabled={this.state.uploading}
-                    acceptText="UPLOAD"
-                    disabledText="UPLOADING..."
-                    cancelText="CANCEL"
-                    onCancel={this.onModalClose}
-                    onAccept={this.uploadImages} />
             </Modal >
         )
     }
 
-    uploadImages = () => {
-        const { product } = this.props.imagesReducer
-        this.setState({ uploading: true })
-        const imageUploadPromises = []
-        const getDownloadUrlPromises = []
-        const productUpdatePromises = []
+    handleImagesUpload = (fileDict, product) => {
+        this.setState({ isUploading: true })
+        const imageList = []
+        const len = fileDict.length
+        for (let i = 0; i < len; i++) {
+            imageList.push(fileDict[i])
+        }
 
-        const currentImageNo = product.images ? product.images.length : 0;
-        this.state.imageList.forEach((imageFile, index) => {
-            const imgName = currentImageNo + index
-            const imageRef = storageRef.child(product.categoryId + "/" + product.id + "/" + imgName);
-            imageUploadPromises.push(imageRef.put(imageFile).then(() => {
-                if (!product.images) {
-                    product.images = []
-                }
-                getDownloadUrlPromises.push(imageRef.getDownloadURL().then(url => {
-                    product.images.push(url)
-                    productUpdatePromises.push(getProductRef(product).set(product))
-                }))
-            }))
-        })
-
-        Promise.all(imageUploadPromises, productUpdatePromises).then(() => {
-            this.setState({ uploading: false })
-            this.onModalClose()
-        })
-    }
-
-    hideConfirmation = () => {
-        this.setState({
-            showConfirmation: false,
-            category: {}
-        })
-    }
-
-    showErrorMsg = () => {
-        this.setState({
-            errorMsg: "Category name cannot be empty"
-        })
-        setTimeout(() => {
-            this.setState({
-                errorMsg: ""
+        const imageUrls = []
+        if (product.images) {
+            product.images.forEach((image) => {
+                imageUrls.push(image)
             })
-        }, 900);
+        }
+
+        const totalImagesCount = product.images.length + len
+
+        imageList.forEach((imageFile) => {
+            const imageRef = storageRef.child(product.categoryId + "/" + product.id + "/" + uuidv4());
+            imageRef.put(imageFile).then(() => {
+                imageRef.getDownloadURL().then(url => {
+                    imageUrls.push(url)
+                    if (totalImagesCount === imageUrls.length) {
+                        product.images = imageUrls
+                        this.updateDb(product)
+                    }
+                })
+            })
+        })
     }
+    updateDb = (product) => {
+        getProductRef(product).set(product).then(() => {
+            console.log(">>>>>>>>>>>>>>>>>> : db updated")
+            this.setState({ isUploading: false })
+        }).catch((err) => {
+            console.log(">>>>>>>>>>>>>>>>>> : db err", err)
+        })
+    }
+
+    onModalClose = () => {
+        this.props.dispatch(closeImageUploadDialog())
+    }
+}
+
+const UploadBtn = (props) => {
+    return props.isDisabled ?
+        <div className="col-6 col-sm-4 col-md-4 col-lg-3">
+            <div className="block2">
+                <div className="block2-img wrap-pic-w of-hidden pos-relative center-cropped-mini"
+                    style={{ backgroundImage: `url("images/loading-2.gif")` }}>
+                </div>
+            </div>
+        </div>
+        : <div className="col-6 col-sm-4 col-md-4 col-lg-3">
+            <ReactFileReader
+                handleFiles={fileDict => props.onImagesUpload(fileDict)}
+                multipleFiles={true}
+                fileTypes={[".webp", ".png", ".jpg", ".gif", ".jpeg", ".svg"]}>
+
+                <div className="block2">
+                    <div className="block2-img wrap-pic-w of-hidden pos-relative center-cropped-mini"
+                        style={{ backgroundImage: `url("images/item-add.jpg")` }}>
+                    </div>
+                </div>
+            </ReactFileReader>
+        </div >
 }
 
 const mapStateToProps = state => {
     return {
-        categoryReducer: state.CategoryReducer,
         imagesReducer: state.ImagesReducer,
         productReducer: state.ProductReducer
     };

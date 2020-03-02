@@ -57,7 +57,7 @@ export default class UploadImagesGrid extends Component {
                             <ReactFileReader
                                 handleFiles={fileDict => this.handleImagesUpload(fileDict)}
                                 multipleFiles={true}
-                                fileTypes={[".png", ".jpg", ".gif", ".jpeg", ".svg"]}>
+                                fileTypes={[".webp", ".png", ".jpg", ".gif", ".jpeg", ".svg"]}>
                                 <div className="block2">
                                     <div className="block2-img wrap-pic-w of-hidden pos-relative">
                                         <img className="add-thumbnail-bg" src="images/item-add.jpg" alt="" />

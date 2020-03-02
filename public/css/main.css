@@ -17,11 +17,15 @@
 .transparent-white {
   background-color: #ffffff99 !important;
 }
+
+.bg-grey {
+  background-color: #eee !important;
+}
 .logo-header {
   position: absolute;
   top: 0;
-  right: 0;
-  left: 0;
+  right: 1%;
+  left: 1%;
 }
 .mobile-fixed-top-header {
   position: fixed;
@@ -41,60 +45,36 @@
   left: 0;
 }
 
-
 .carousel-caption-title {
   font-size: 100px !important;
   font-weight: 100 !important;
-  margin: 20px;
-}
-
-.carousel-caption-centered {
-  bottom: 30% !important;
+  margin: 20px 0;
 }
 
 @media (max-width: 576px) {
   .carousel-caption-title {
-    font-size: 40px !important;
     font-weight: 100 !important;
-    margin: 20px;
   }
   .mobile-top-margin,
   .topbar2 {
     margin-top: 160px;
   }
-
-  .carousel-caption-centered {
-    bottom: 20% !important;
-  }
 }
 
 @media screen and (max-width: 800px) and (min-width: 567px) {
   .carousel-caption-title {
-    font-size: 50px !important;
     font-weight: 100 !important;
-    margin: 20px;
   }
   .mobile-top-margin,
   .topbar2 {
     margin-top: 140px;
   }
-  .carousel-caption-centered {
-    bottom: 20% !important;
-  }
 }
 
-@media screen and (max-width: 1000px) and (min-width: 800px) {
-  .carousel-caption-title {
-    font-size: 70px !important;
-    font-weight: 100 !important;
-    margin: 20px;
-  }
+@media screen and (max-width: 992px) and (min-width: 800px) {
   .mobile-top-margin,
   .topbar2 {
     margin-top: 120px;
-  }
-  .carousel-caption-centered {
-    bottom: 20% !important;
   }
 }
 
@@ -209,7 +189,7 @@ p {
   font-family: Montserrat-Regular;
   font-size: 15px;
   line-height: 1.7;
-  color: #888888;
+  color: #333;
   margin: 0px;
 }
 
@@ -1274,16 +1254,17 @@ li.sale-noti > a {
 
 /* ------------------------------------ */
 .logo2 {
-  margin-top: 16px;
+  margin-top: 40px;
   display: block;
+  text-align: center;
 }
 
 .logo2 img {
-  max-height: 130px;
+  max-height: 140px;
 }
 
 .fixed-header2 {
-  z-index: 1300;
+  z-index: 999;
   position: fixed;
   height: 65px;
   left: 0;
@@ -1783,7 +1764,7 @@ li.sale-noti > a {
 }
 
 /* ------------------------------------ */
-.block2-btn-addcart {
+.block2-btn-addcart, .block2-btn-addcart1, .block2-btn-addcart2 {
   position: absolute;
   left: 50%;
   -webkit-transform: translateX(-50%);
@@ -1792,6 +1773,13 @@ li.sale-noti > a {
   -o-transform: translateX(-50%);
   transform: translateX(-50%);
   bottom: -45px;
+}
+.block2-overlay:hover .block2-btn-addcart1 {
+  bottom: 70px;
+}
+
+.block2-overlay:hover .block2-btn-addcart2 {
+  bottom: 120px;
 }
 
 /* ------------------------------------ */

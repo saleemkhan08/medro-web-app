@@ -1,15 +1,28 @@
-import { DELETE_PRODUCT, DISPLAY_PRODUCTS_TAB, EDIT_PRODUCTS, FETCH_PRODUCTS_BEGIN, FETCH_PRODUCTS_SUCCESS, HIDE_PRODUCTS_TAB, HIDE_PRODUCT_EDIT_MODAL, SAVE_PRODUCTS, SET_CURRENT_PRODUCT, SHOW_PRODUCT_EDIT_MODAL } from "./ProductActions";
+import { DELETE_PRODUCT, DISPLAY_PRODUCTS_TAB, EDIT_PRODUCTS, FETCH_PRODUCTS_BEGIN, FETCH_PRODUCTS_SUCCESS, HIDE_ORDER_PRODUCT_MODAL, HIDE_PRODUCTS_TAB, HIDE_PRODUCT_EDIT_MODAL, SAVE_PRODUCTS, SET_CURRENT_PRODUCT, SHOW_ORDER_PRODUCT_MODAL, SHOW_PRODUCT_EDIT_MODAL } from "./ProductActions";
 
 const initialState = {
     products: [],
     isLoading: true,
     error: null,
     currentProduct: undefined,
-    showProdEditModal: false
+    showProdEditModal: false,
+    showOrderProdModal: false
 };
 
 const ProductReducer = (state = initialState, action) => {
     switch (action.type) {
+        case HIDE_ORDER_PRODUCT_MODAL:
+            return {
+                ...state,
+                showOrderProdModal: false,
+                currentProduct: undefined
+            };
+        case SHOW_ORDER_PRODUCT_MODAL:
+            return {
+                ...state,
+                showOrderProdModal: true,
+                currentProduct: action.payload
+            };
         case SHOW_PRODUCT_EDIT_MODAL:
             return {
                 ...state,

@@ -4,14 +4,16 @@ class ProductsSection extends Component {
 
     render() {
         return (
-            <section className="bgwhite p-t-45 p-b-58 below-slide">
-                <div className="container">
-                    <div className="sec-title p-b-22">
-                        <h3 className="m-text5 t-center">Our Products</h3>
-                    </div>
-                    <CategoryTabs />
+            <div id="products">
+                <div className="sec-title" >
+                    <h3>Our Products</h3>
                 </div>
-            </section >);
+                <section className="bgwhite p-b-40">
+                    <div className="container">
+                        <CategoryTabs />
+                    </div>
+                </section >
+            </div>);
     }
 }
 

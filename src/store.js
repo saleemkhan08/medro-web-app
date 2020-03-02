@@ -45,3 +45,5 @@ export const database = firebase.database();
 export const auth = firebase.auth();
 
 export const storageRef = firebase.storage().ref();
+
+export const storage = firebase.storage();

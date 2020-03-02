@@ -1,4 +1,3 @@
-import firebase from "firebase/app";
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { auth } from "../../store";
@@ -22,21 +21,20 @@ class HeaderLinks extends Component {
 
   render() {
     const { classNames, linkClass } = this.props
-    const provider = new firebase.auth.GoogleAuthProvider();
     return (
       <ul className={classNames}>
         <li className={linkClass}>
-          <a href="#about">About</a>
+          <a href="#about" className="full-width-height">About</a>
         </li>
         <li className={linkClass}>
-          <a href="#products">Products</a>
+          <a href="#products" className="full-width-height">Products</a>
         </li>
         <li className={linkClass}>
-          <a href="#contact">Contact</a>
+          <a href="#contact" className="full-width-height">Contact</a>
         </li>
         {
           this.state.isLoggedIn ? <LogoutLink linkClass={linkClass} />
-            : <LoginLink linkClass={linkClass} provider={provider} />
+            : <LoginLink linkClass={linkClass} />
         }
       </ul>
     )

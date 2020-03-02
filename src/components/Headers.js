@@ -26,13 +26,12 @@ export const TransparentHeader = () => {
                         <HeaderLinks classNames="main_menu white-menu main_menu2" />
                     </nav>
                 </div>
-
-                <div className="header-icons" />
             </div>
             <div className="topbar2 bg-transparent">
-                <a href="index.html" className="logo2">
-                    <img src="images/medro_title_rounded_shadow.png" alt="IMG-LOGO" />
-                </a>
+                <div className="logo2">
+                    <img src="images/medro-icon-white.png" alt="IMG-LOGO" />
+                    <h1 className="carousel-caption-title carousel-medro-title">Medro</h1>
+                </div>
             </div>
         </div>
     );

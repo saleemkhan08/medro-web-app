@@ -3,82 +3,29 @@ export const Slides = (props) => {
   return (
     <div className="mobile-top-margin">
       <div
-        id="carouselExampleIndicators"
+        id="carouselIndicators"
         className="carousel slide"
         data-ride="carousel"
       >
         <ol className="carousel-indicators">
           <li
-            data-target="#carouselExampleIndicators"
+            data-target="#carouselIndicators"
             data-slide-to="0"
             className="active"
           />
-          <li data-target="#carouselExampleIndicators" data-slide-to="1" />
-          <li data-target="#carouselExampleIndicators" data-slide-to="2" />
-          <li data-target="#carouselExampleIndicators" data-slide-to="3" />
+          <li data-target="#carouselIndicators" data-slide-to="1" />
+          <li data-target="#carouselIndicators" data-slide-to="2" />
+          <li data-target="#carouselIndicators" data-slide-to="3" />
         </ol>
-
         <div className="carousel-inner">
-          <div className="carousel-item active">
-            <img
-              src="images/wallets.jpg"
-              className="d-block slide-img"
-              alt="..."
-            />
-            <div className="carousel-overlay" />
-            <div className="carousel-caption carousel-caption-centered d-md-block">
-              <h1 className="carousel-caption-title">Wallets</h1>
-              <button type="button" className="btn btn-outline-white">
-                SHOP NOW
-              </button>
-            </div>
-          </div>
-          <div className="carousel-item">
-            <img
-              src="images/clutches.jpg"
-              className="d-block slide-img"
-              alt="..."
-            />
-            <div className="carousel-overlay" />
-            <div className="carousel-caption carousel-caption-centered d-md-block">
-              <h1 className="carousel-caption-title">Clutches</h1>
-              <button type="button" className="btn btn-outline-white">
-                SHOP NOW
-              </button>
-            </div>
-          </div>
-          <div className="carousel-item">
-            <img
-              src="images/passport-holders.jpg"
-              className="d-block slide-img"
-              alt="..."
-            />
-            <div className="carousel-overlay" />
-            <div className="carousel-caption carousel-caption-centered  d-md-block">
-              <h1 className="carousel-caption-title">Passport Holders</h1>
-              <button type="button" className="btn btn-outline-white">
-                SHOP NOW
-              </button>
-            </div>
-          </div>
-          <div className="carousel-item">
-            <img
-              src="images/book-covers.jpg"
-              className="d-block slide-img"
-              alt="..."
-            />
-            <div className="carousel-overlay" />
-            <div className="carousel-caption carousel-caption-centered  d-md-block">
-              <h1 className="carousel-caption-title">Book Covers</h1>
-              <button type="button" className="btn btn-outline-white">
-                SHOP NOW
-              </button>
-            </div>
-          </div>
+          <CarouselItem className="carousel-item active" text="Wallets" img="images/wallets.jpg" />
+          <CarouselItem className="carousel-item" text="Clutches" img="images/clutches.jpg" />
+          <CarouselItem className="carousel-item" text="Passport Holders" img="images/passport-holders.jpg" />
+          <CarouselItem className="carousel-item" text="Book Covers" img="images/book-covers.jpg" />
         </div>
         <a
           className="carousel-control-prev"
-          href="#carouselExampleIndicators"
+          href="#carouselIndicators"
           role="button"
           data-slide="prev"
         >
@@ -87,7 +34,7 @@ export const Slides = (props) => {
         </a>
         <a
           className="carousel-control-next"
-          href="#carouselExampleIndicators"
+          href="#carouselIndicators"
           role="button"
           data-slide="next"
         >
@@ -99,5 +46,22 @@ export const Slides = (props) => {
     </div>
   );
 };
+
+const CarouselItem = (props) => {
+  const { text, img, isTwoWords, ...other } = props
+  return (
+    <div {...other}>
+      <img
+        src={img}
+        className="d-block slide-img"
+        alt="..."
+      />
+      <div className="carousel-overlay" />
+      <div className="carousel-caption carousel-caption-centered d-md-block ">
+        <h1 className="carousel-caption-title ">{text}</h1>
+      </div>
+    </div>
+  )
+}
 
 export default Slides;

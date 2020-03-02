@@ -4,7 +4,7 @@ import { showProductEditModal } from "./ProductActions";
 class AddProductThumbnail extends Component {
     render() {
         return (
-            <div className="col-sm-6 col-md-4 col-lg-3 p-b-50">
+            <div className="col-sm-6 col-md-4 col-lg-3">
                 <div className="block2 add-product-container">
                     <div className="block2-img wrap-pic-w of-hidden pos-relative center-cropped"
                         style={{ backgroundImage: `url("images/item-add.jpg")` }}>

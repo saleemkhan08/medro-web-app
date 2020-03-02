@@ -17,6 +17,26 @@ export const IMAGE_KEYWORDS_UPDATE_ERROR = "IMAGE_KEYWORDS_UPDATE_ERROR";
 export const IMAGE_UPDATE_BEGIN = "IMAGE_UPDATE_BEGIN";
 export const IMAGE_UPDATE_SUCCESS = "IMAGE_UPDATE_SUCCESS";
 export const IMAGE_UPDATE_ERROR = "IMAGE_UPDATE_ERROR";
+export const SHOW_PRODUCT_IMAGE_GALLERY = "SHOW_PRODUCT_IMAGE_GALLERY";
+export const HIDE_PRODUCT_IMAGE_GALLERY = "HIDE_PRODUCT_IMAGE_GALLERY";
+export const showProductImages = product => {
+    return dispatch => {
+        const images = []
+        product.images.forEach((image) => {
+            images.push(image)
+        })
+        dispatch(showProductImagesGallery(images));
+    };
+};
+
+export const showProductImagesGallery = (images) => ({
+    type: SHOW_PRODUCT_IMAGE_GALLERY,
+    payload: images
+});
+
+export const hideProductImagesGallery = () => ({
+    type: HIDE_PRODUCT_IMAGE_GALLERY
+});
 
 export const openImageUploadDialog = (product) => ({
     type: OPEN_IMAGE_UPLOAD_DIALOG,
@@ -209,6 +229,14 @@ export const fetchImagesSuccess = images => ({
     type: FETCH_IMAGES_SUCCESS,
     payload: images
 });
+
+export const uploadImages = (imagesList) => {
+    return dispatch => {
+        imagesList.forEach((image) => {
+
+        })
+    }
+}
 
 export const uploadImage = (imgFile, keywords) => {
     const fileExtension = imgFile.name.split(".").pop();

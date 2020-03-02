@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import EditProduct from "../products/EditProductModal";
 import { fetchProducts } from "../products/ProductActions";
 import Products from "../products/Products";
-//import EditCategories from "./EditCategories";
 import { fetchCategories, setCurrentCategory } from "./CategoryActions";
 import EditCategories from "./EditCategoriesModal";
 class CategoryTabs extends Component {
@@ -19,21 +18,28 @@ class CategoryTabs extends Component {
 
     render() {
         const { categories } = this.props.categoryReducer;
-        const { isLoggedIn } = this.props.authReducer;
+        const { isAdmin } = this.props.authReducer;
         if (categories && categories.length > 0) {
             return (
                 <div className="tab01">
-                    <CategoryTabsLinks categories={categories} isLoggedIn={isLoggedIn}
+                    <CategoryTabsLinks categories={categories} isAdmin={isAdmin}
                         editCategories={this.editCategories} onLinkClick={
                             (category) => this.props.dispatch(setCurrentCategory(category))
                         } />
                     <ProductTabContents categories={categories} />
-                    <EditCategories showModal={this.state.showCatModal} hideModal={() => { this.hideModal("showCatModal") }} />
-                    <EditProduct />
+                    {
+                        isAdmin ?
+                            <div>
+                                <EditCategories showModal={this.state.showCatModal} hideModal={() => { this.hideModal("showCatModal") }} />
+                                <EditProduct />
+                            </div>
+                            :
+                            ""
+                    }
                 </div>
             );
         }
-        return <div className="loading-div">Loading ...</div>
+        return <ProductsLoading />
     }
 
     editCategories = () => {
@@ -49,8 +55,15 @@ class CategoryTabs extends Component {
     }
 };
 
+const ProductsLoading = () => {
+    return (
+        <div className="loading-container">
+            <img src="images/loading.gif" alt="LOADING..." />
+        </div>
+    )
+}
 const CategoryTabsLinks = (props) => {
-    const { categories, isLoggedIn, editCategories, onLinkClick } = props
+    const { categories, isAdmin, editCategories, onLinkClick } = props
     let catCount = 0;
     return (
         <ul className="nav nav-tabs" role="tablist">
@@ -71,13 +84,13 @@ const CategoryTabsLinks = (props) => {
                     </li>
                 );
             })}
-            <CategoriesEditOption isLoggedIn={isLoggedIn} editCategories={editCategories} />
+            <CategoriesEditOption isAdmin={isAdmin} editCategories={editCategories} />
         </ul >
     )
 }
 
 const CategoriesEditOption = (props) => {
-    if (props.isLoggedIn) {
+    if (props.isAdmin) {
         return (
             <li className="nav-item" >
                 <button className="flex-c-m size2 bg4 bo-rad-23 hov1 m-text3 trans-0-4"
