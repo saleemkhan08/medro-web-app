@@ -46,7 +46,7 @@ class ImageSelectorModal extends Component {
             })
         }
 
-        const totalImagesCount = product.images.length + len
+        const totalImagesCount = (product && product.images) ? product.images.length + len : len
 
         imageList.forEach((imageFile) => {
             const imageRef = storageRef.child(product.categoryId + "/" + product.id + "/" + uuidv4());
