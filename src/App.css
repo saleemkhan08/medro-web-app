@@ -2,12 +2,12 @@
   opacity: 0.5;
   cursor: not-allowed !important;
 }
-.actual-price{
+.actual-price {
   text-decoration: line-through;
   font-size: 20px;
   color: #999;
 }
-.discounted-price{
+.discounted-price {
 }
 .show-on-touchscreen {
   display: none;
@@ -480,41 +480,35 @@ COMMON CSS
   left: 43%;
 }
 
-.add-category-row {
-  margin: 10px !important;
-}
-
 .new-category-input {
   border: #ddd solid 0.5px;
   padding: 10px 20px;
   flex: 1;
+  min-width: 30px !important;
   border-radius: 20px 0 0 20px;
 }
 
 .add-category-btn {
   border-radius: 0 20px 20px 0 !important;
+  background-color: #e65540;
+  color: #fff;
+  font-family: Montserrat-Regular;
 }
+
+.add-category-btn:hover{
+  background-color: #333;
+}
+
 .swal-title {
   font-size: 25px !important;
 }
 .category-row {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  -ms-box-orient: horizontal;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -moz-flex;
-  display: -webkit-flex;
   display: flex;
+  flex-direction: row;
+}
 
-  -webkit-justify-content: space-around;
-  justify-content: space-around;
-  -webkit-flex-flow: row wrap;
-  flex-flow: row wrap;
-  -webkit-align-items: stretch;
-  align-items: stretch;
+.add-category-row{
+  margin: 10px 10px 10px 0;
 }
 
 .hidden-edit {

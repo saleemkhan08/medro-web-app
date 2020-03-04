@@ -115,7 +115,7 @@ class EditCategories extends Component {
     editCategoryInput = (id) => {
         return (
             <InputBtnGroup
-                className={"category-row add-category-row edit-category-name " + this.state[id + "css"]}
+                className={"category-row add-category-row " + this.state[id + "css"]}
                 value={this.state[id + "name"]}
                 name={[id + "name"]}
                 placeholderErr="Category Name cannot be empty"

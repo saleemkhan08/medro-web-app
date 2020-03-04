@@ -51,7 +51,7 @@ export const InputBtnGroup = (props) => {
                 type="text" />
 
             <button onClick={() => { onClick() }}
-                className={buttonClass || "swal-button add-category-btn"}>
+                className={buttonClass || "add-category-btn"}>
                 {buttonTxt}
             </button>
         </div>
