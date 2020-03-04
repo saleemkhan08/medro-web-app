@@ -202,7 +202,7 @@ li {
 /* ------------------------------------ */
 input {
   outline: none;
-  border: none !important;
+  border: none ;
 }
 
 textarea {

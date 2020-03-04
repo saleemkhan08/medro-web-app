@@ -2,22 +2,19 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { auth, database } from "../store";
 import { showLoginRequired, showToastMsg } from "./headers/AuthActions";
+import { Input, TextArea } from "./utilities/Input";
 class ContactSection extends Component {
     state = {
         name: "",
         phoneNo: "",
         email: "",
         message: "",
-        namePH: "Name",
-        phoneNoPH: "Phone Number",
-        emailPH: "Email",
-        messagePH: "Message",
+        nameErr: false,
+        phoneNoErr: false,
+        emailErr: false,
+        messageErr: false,
         errorMsg: "",
         uid: "",
-        enamePH: "",
-        ephoneNoPH: "",
-        eemailPH: "",
-        emessagePH: "",
         isSendMsgStarted: false
     }
 
@@ -84,31 +81,28 @@ class ContactSection extends Component {
                             this.props.dispatch(showLoginRequired("Please Login to send message!"))
                         }
                     } else {
-                        this.showErrorMsg("messagePH", "Please Enter the Message!")
+                        this.showError("messageErr")
                     }
                 } else {
-                    this.showErrorMsg("emailPH", "Please Enter the Email!")
+                    this.showError("emailErr")
                 }
             } else {
-                this.showErrorMsg("phoneNoPH", "Please Enter the Phone number!")
+                this.showError("phoneNoErr")
             }
         } else {
-            this.showErrorMsg("namePH", "Please Enter the Name!")
+            this.showError("nameErr")
         }
     }
 
-    showErrorMsg = (key, value) => {
-        const initValue = this.state[key]
+    showError = (key) => {
         this.setState({
-            [key]: value,
-            ["e" + key]: "err-placeholder"
+            [key]: true
         })
         setTimeout(() => {
             this.setState({
-                [key]: initValue,
-                ["e" + key]: ""
+                [key]: false
             })
-        }, 1000);
+        }, 1000)
     }
 
     render() {
@@ -135,37 +129,46 @@ class ContactSection extends Component {
                                 </h4>
 
                                 <div className="bo4 of-hidden size15 m-b-20">
-                                    <input className={"sizefull s-text7 p-l-22 p-r-22 " + this.state.enamePH}
+                                    <Input
+                                        className="sizefull s-text7 p-l-22 p-r-22"
                                         type="text"
                                         name="name"
-                                        placeholder={this.state.namePH}
+                                        placeholder="Name"
+                                        placeholderErr="Please enter your Name"
+                                        isInvalid={this.state.nameErr}
                                         onChange={this.handleOnChange}
                                         value={this.state.name} />
                                 </div>
 
                                 <div className="bo4 of-hidden size15 m-b-20">
-                                    <input className={"sizefull s-text7 p-l-22 p-r-22 " + this.state.ephoneNoPH}
+                                    <Input className="sizefull s-text7 p-l-22 p-r-22"
                                         type="text"
                                         name="phoneNo"
                                         onChange={this.handleOnChange}
-                                        placeholder={this.state.phoneNoPH}
-                                        value={this.state.phoneNo} />
+                                        value={this.state.phoneNo}
+                                        placeholder="Contact Number"
+                                        placeholderErr="Please enter your Phone No."
+                                        isInvalid={this.state.phoneNoErr} />
                                 </div>
 
                                 <div className="bo4 of-hidden size15 m-b-20">
-                                    <input className={"sizefull s-text7 p-l-22 p-r-22 " + this.state.eemailPH}
+                                    <Input className="sizefull s-text7 p-l-22 p-r-22"
                                         type="text"
                                         name="email"
                                         onChange={this.handleOnChange}
-                                        placeholder={this.state.emailPH}
-                                        value={this.state.email} />
+                                        value={this.state.email}
+                                        placeholder="Email"
+                                        placeholderErr="Please enter your Email"
+                                        isInvalid={this.state.emailErr} />
                                 </div>
 
-                                <textarea className={"dis-block s-text7 size20 bo4 p-l-22 p-r-22 p-t-13 m-b-20 " + this.state.emessagePH}
+                                <TextArea className="dis-block s-text7 size20 bo4 p-l-22 p-r-22 p-t-13 m-b-20"
                                     name="message"
                                     onChange={this.handleOnChange}
-                                    placeholder={this.state.messagePH}
                                     value={this.state.message}
+                                    placeholder="Message"
+                                    placeholderErr="Please enter your Message"
+                                    isInvalid={this.state.messageErr}
                                 />
                                 <div className="w-size25">
                                     <button

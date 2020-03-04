@@ -15,7 +15,7 @@ class LoginModal extends Component {
                 acceptText="LOGIN"
                 cancelText="CANCEL"
                 showConfirmation={showLoginRequired}
-                onCancel={hideLoginRequired}
+                onCancel={() => { this.props.dispatch(hideLoginRequired()) }}
                 confirmationText={loginRequiredMsg} />
         )
     }

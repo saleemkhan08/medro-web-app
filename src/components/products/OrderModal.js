@@ -3,9 +3,11 @@ import { connect } from "react-redux";
 import Modal, { ModalHeader } from "thnki-react-modal";
 import { auth, database } from "../../store";
 import { showToastMsg } from "../headers/AuthActions";
+import Input from '../utilities/Input';
 import ToastMsg from '../utilities/ToastMsg';
 import { hideOrderProductModal } from "./ProductActions";
 import "./products.css";
+const DISCOUNT_PERCENTAGE = 0.9
 class OrderModal extends Component {
     state = {
         errorMsg: "",
@@ -14,9 +16,8 @@ class OrderModal extends Component {
         email: "",
         name: "",
         uid: "",
-        phonePH: "Contact Number",
-        ephonePH: "",
-        isPlacingOrder: false
+        isPlacingOrder: false,
+        phoneNoErr: false
     }
     parentId = "OrderModal"
     hideModal = () => {
@@ -42,20 +43,6 @@ class OrderModal extends Component {
         })
     }
 
-    showErrorMsg = (key, value) => {
-        const initValue = this.state[key]
-        this.setState({
-            [key]: value,
-            ["e" + key]: "err-placeholder"
-        })
-        setTimeout(() => {
-            this.setState({
-                [key]: initValue,
-                ["e" + key]: ""
-            })
-        }, 1000);
-    }
-
     placeOrder = (product) => {
         const { numProduct, phoneNo, name, email, uid } = this.state
         if (phoneNo) {
@@ -75,13 +62,25 @@ class OrderModal extends Component {
                 }, 1000)
             })
         } else {
-            this.showErrorMsg("phonePH", "Phone No. Required!")
+            this.showError("phoneNoErr")
         }
+    }
+
+    showError = (key) => {
+        this.setState({
+            [key]: true
+        })
+        setTimeout(() => {
+            this.setState({
+                [key]: false
+            })
+        }, 1000)
     }
 
     render() {
         const { showOrderProdModal, currentProduct } = this.props.productReducer;
         const disabled = this.state.isPlacingOrder ? "disabled" : ""
+        const { numProduct } = this.state
         if (!currentProduct) {
             return ""
         }
@@ -105,7 +104,11 @@ class OrderModal extends Component {
                                 {currentProduct.name}
                             </div>
                             <div className="product-detail-price m-text17">
-                                {"₹ " + currentProduct.price}
+                                <span className="discounted-price">{"₹ " + (currentProduct.price * numProduct * DISCOUNT_PERCENTAGE)}</span>
+                                <br />
+                                <span className="actual-price">{"₹ " + (currentProduct.price * numProduct)}</span>
+
+
                             </div>
                         </div>
                         <div className="s-text8 p-t-10 product-order-description">
@@ -134,14 +137,14 @@ class OrderModal extends Component {
                                 </button>
                             </div>
                         </div>
-                        <div>
-                            <input
-                                placeholder={this.state.phonePH}
-                                className={"product-order-input " + this.state.ephonePH}
-                                value={this.state.phoneNo}
-                                name="phoneNo"
-                                onChange={this.handleOnChange} />
-                        </div>
+                        <Input
+                            placeholderErr="Phone No. Required!"
+                            isInvalid={this.state.phoneNoErr}
+                            placeholder="Contact Number"
+                            className="product-order-input"
+                            value={this.state.phoneNo}
+                            name="phoneNo"
+                            onChange={this.handleOnChange} />
                         <div className="btn-addcart-product-detail size9 trans-0-4 m-t-10 m-b-10">
                             <button className={"flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4 " + disabled} onClick={() => {
                                 if (!this.state.isPlacingOrder) {

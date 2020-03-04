@@ -1,11 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import Modal, { ModalFooter, ModalHeader } from "thnki-react-modal";
+import Input from '../utilities/Input';
 import { hideProductEditModal, saveProduct } from "./ProductActions";
 import "./products.css";
 class EditProduct extends Component {
     state = {
-        errorMsg: ""
+        name: "",
+        price: "",
+        description: "",
+        amazon: "",
+        flipkart: "",
+        nameErr: false,
+        priceErr: false,
+        descriptionErr: false,
+        amazonErr: false,
+        flipkartErr: false,
+        id: undefined,
+        categoryId: "",
+        images: []
     }
 
     handleOnChange = (event) => {
@@ -32,7 +45,9 @@ class EditProduct extends Component {
                     description: "",
                     amazon: "",
                     flipkart: "",
-                    id: undefined
+                    id: undefined,
+                    categoryId: "",
+                    images: []
                 })
             }
         }
@@ -53,37 +68,49 @@ class EditProduct extends Component {
                 openModal={showProdEditModal}>
                 <ModalHeader text="Product Editor" />
                 <div className="edit-products-modal-body" >
-                    <input
+                    <Input
                         className="new-product-input"
                         value={this.state.name}
                         name="name"
                         onChange={this.handleOnChange}
-                        type="text" placeholder="PRODUCT NAME" />
-                    <input
+                        type="text" placeholder="Product Name"
+                        placeholderErr="Name is Required!"
+                        isInvalid={this.state.nameErr} />
+                    <Input
                         className="new-product-input"
                         value={this.state.price}
                         name="price"
                         onChange={this.handleOnChange}
-                        type="text" placeholder="PRODUCT PRICE" />
-                    <input
+                        type="text" placeholder="Product Price"
+                        placeholderErr="Price is Required!"
+                        isInvalid={this.state.priceErr} />
+                    <Input
                         className="new-product-input"
                         value={this.state.description}
                         name="description"
                         onChange={this.handleOnChange}
-                        type="text" placeholder="PRODUCT DESCRIPTION" />
-                    <input
+                        type="text"
+                        placeholder="Prodcut Description"
+                        placeholderErr="Description is Required!"
+                        isInvalid={this.state.descriptionErr}
+                    />
+                    <Input
                         className="new-product-input"
                         value={this.state.amazon}
                         name="amazon"
                         onChange={this.handleOnChange}
-                        type="text" placeholder="AMAZON LINK" />
-                    <input
+                        placeholderErr="Amazon Link is Required!"
+                        isInvalid={this.state.amazonErr}
+                        type="text" placeholder="Amazon Link" />
+                    <Input
                         className="new-product-input"
                         value={this.state.flipkart}
                         onChange={this.handleOnChange}
                         name="flipkart"
-                        type="text" placeholder="FLIPKART LINK" />
-                    <div className="modal-err-msg">{this.state.errorMsg}</div>
+                        type="text"
+                        placeholderErr="Flipkart Link is Required!"
+                        isInvalid={this.state.flipkartErr}
+                        placeholder="Flipkart Link" />
                 </div>
                 <ModalFooter
                     isDisabled={false}
@@ -107,7 +134,8 @@ class EditProduct extends Component {
             price: price,
             description: description,
             amazon: amazon,
-            flipkart: flipkart
+            flipkart: flipkart,
+            images: currentProduct && currentProduct.images ? currentProduct.images : []
         }
 
         if (name) {
@@ -117,33 +145,32 @@ class EditProduct extends Component {
                         if (flipkart) {
                             this.props.dispatch(saveProduct(product))
                         } else {
-                            this.showErrorMsg("Please enter flipkart link")
+                            this.showError("flipkartErr")
                         }
                     } else {
-                        this.showErrorMsg("Please enter amazon link")
+                        this.showError("amazonErr")
                     }
                 } else {
-                    this.showErrorMsg("Please enter product description")
+                    this.showError("descriptionErr")
                 }
 
             } else {
-                this.showErrorMsg("Please enter product price")
+                this.showError("priceErr")
             }
         } else {
-            this.showErrorMsg("Please enter product name")
+            this.showError("nameErr")
         }
-
-
     }
-    showErrorMsg = (msg) => {
+
+    showError = (key) => {
         this.setState({
-            errorMsg: msg
+            [key]: true
         })
         setTimeout(() => {
             this.setState({
-                errorMsg: ""
+                [key]: false
             })
-        }, 900);
+        }, 1000)
     }
 }
 

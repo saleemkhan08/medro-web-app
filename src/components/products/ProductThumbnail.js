@@ -34,16 +34,18 @@ class ProductThumbnail extends Component {
                 <div className="block2 thumbnail-prod">
                     <div className="block2-img wrap-pic-w of-hidden pos-relative center-cropped thumbnail-prod-img"
                         style={{ backgroundImage: `url(${mainImage})` }} >
-                        <div className="block2-overlay trans-0-4" onClick={(event) => {
-                            console.log(">>>>>>>>>>>>>>>> Background : ", event.currentTarget, event.target)
-                            if (event.target === event.currentTarget)
-                                this.showGallery(product)
-                        }}>
+                        <div className="block2-overlay trans-0-4"
+                            onClick={(event) => {
+                                console.log(">>>>>>>>>>>>>>>> Background : ", event.currentTarget, event.target)
+                                if (event.target === event.currentTarget)
+                                    this.showGallery(product)
+                            }}
+                        >
                             {isAdmin ?
                                 this.getEditOptions(product)
                                 : ""
                             }
-                            <div className="block2-btn-addcart w-size1 trans-0-4">
+                            <div className="block2-btn-addcart w-size1 trans-0-4 hide-on-touchscreen">
                                 <button className="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4"
                                     onClick={(event) => {
                                         console.log(">>>>>>>>>>>>>>>> Button : ", event.currentTarget)
@@ -58,25 +60,36 @@ class ProductThumbnail extends Component {
                     </div>
 
                     <div className="prod-details-container">
-                        <div className="prod-details">
-                            <div className="prod-name s-text3">
-                                {name}
-                            </div>
+                        <div className="row prod-details-inner-container">
+                            <div className="prod-details">
+                                <div className="prod-name s-text3">
+                                    {name}
+                                </div>
 
-                            <div className="prod-price m-text6">
-                                {"₹ " + price}
+                                <div className="prod-price m-text6">
+                                    {"₹ " + price}
+                                </div>
+                            </div>
+                            <div className="buy-container">
+                                <div className="buy-buttons">
+                                    <a href={product.amazon} target="_blank" rel="noopener noreferrer">
+                                        <img src="images/amazon-logo.png" className="buyLogo" alt="amazon" />
+                                    </a>
+                                    <a href={product.flipkart} target="_blank" rel="noopener noreferrer">
+                                        <img src="images/flipkart-logo.png" className="buyLogo" alt="flipkart" />
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                        <div className="buy-container">
-                            <div className="buy-buttons">
-                                <a href={product.amazon} target="_blank" rel="noopener noreferrer">
-                                    <img src="images/amazon-logo.png" className="buyLogo" alt="amazon" />
-                                </a>
-                                <a href={product.flipkart} target="_blank" rel="noopener noreferrer">
-                                    <img src="images/flipkart-logo.png" className="buyLogo" alt="flipkart" />
-                                </a>
-                            </div>
-                        </div>
+                        <button className="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4 m-t-10 show-on-touchscreen"
+                            onClick={(event) => {
+                                console.log(">>>>>>>>>>>>>>>> Button : ", event.currentTarget)
+                                if (event.target === event.currentTarget) {
+                                    this.orderProduct(product)
+                                }
+                            }}>
+                            Bulk Order
+                            </button>
                     </div>
                 </div>
                 <ConfirmationModal
