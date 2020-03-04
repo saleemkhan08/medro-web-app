@@ -63,10 +63,8 @@ class ImageSelectorModal extends Component {
     }
     updateDb = (product) => {
         getProductRef(product).set(product).then(() => {
-            console.log(">>>>>>>>>>>>>>>>>> : db updated")
             this.setState({ isUploading: false })
         }).catch((err) => {
-            console.log(">>>>>>>>>>>>>>>>>> : db err", err)
         })
     }
 

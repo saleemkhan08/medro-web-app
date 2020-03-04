@@ -21,7 +21,6 @@ class ContactSection extends Component {
     componentDidMount() {
         auth.onAuthStateChanged((user) => {
             if (user) {
-                console.log("onAuthStateChanged")
                 if (this.state.isSendMsgStarted) {
                     this.setState({
                         uid: user.uid,
@@ -174,7 +173,6 @@ class ContactSection extends Component {
                                     <button
                                         className={"flex-c-m size2 bg1 bo-rad-23 hov1 m-text3 trans-0-4 " + disabledClass}
                                         onClick={() => {
-                                            console.log("Clicked this.state.isSending: ", this.state.isSending)
                                             if (!this.state.isSending) {
                                                 this.sendMessage()
                                             }

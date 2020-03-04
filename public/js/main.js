@@ -53,11 +53,6 @@
     $(".wrap-side-menu").slideToggle();
     var linkId = $(this).children("a").attr("href")
     var offsetValue = $(linkId).offset().top - 80
-    var headerOffsetT = $(".mobile-fixed-top-header").offset().top
-    console.log(">>>>>>>>>>>>>>>>>> top :", headerOffsetT)
-
-    var headerOffsetB = $(".mobile-fixed-top-header").offset().bottom
-    console.log(">>>>>>>>>>>>>>>>>> bottom :", headerOffsetB)
 
     $([document.documentElement, document.body]).animate({
       scrollTop: offsetValue

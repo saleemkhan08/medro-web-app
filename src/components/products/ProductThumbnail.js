@@ -36,7 +36,6 @@ class ProductThumbnail extends Component {
                         style={{ backgroundImage: `url(${mainImage})` }} >
                         <div className="block2-overlay trans-0-4"
                             onClick={(event) => {
-                                console.log(">>>>>>>>>>>>>>>> Background : ", event.currentTarget, event.target)
                                 if (event.target === event.currentTarget)
                                     this.showGallery(product)
                             }}
@@ -48,7 +47,6 @@ class ProductThumbnail extends Component {
                             <div className="block2-btn-addcart w-size1 trans-0-4 hide-on-touchscreen">
                                 <button className="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4"
                                     onClick={(event) => {
-                                        console.log(">>>>>>>>>>>>>>>> Button : ", event.currentTarget)
                                         if (event.target === event.currentTarget) {
                                             this.orderProduct(product)
                                         }
@@ -83,7 +81,6 @@ class ProductThumbnail extends Component {
                         </div>
                         <button className="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4 m-t-10 show-on-touchscreen"
                             onClick={(event) => {
-                                console.log(">>>>>>>>>>>>>>>> Button : ", event.currentTarget)
                                 if (event.target === event.currentTarget) {
                                     this.orderProduct(product)
                                 }
